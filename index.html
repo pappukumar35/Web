@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Leave Management System</h2>
+
+    <form id="leaveForm">
+        <label for="leaveType">Leave Type:</label>
+        <select id="leaveType" name="leaveType">
+            <option value="casual">Casual Leave</option>
+            <option value="medical">Medical Leave</option>
+        </select>
+
+        <label for="leaveDays">Number of Days:</label>
+        <input type="number" id="leaveDays" name="leaveDays" min="1" required>
+
+        <button type="button" onclick="applyLeave()">Apply Leave</button>
+    </form>
+
+    <div id="leaveBalance">
+        <h3>Leave Balance</h3>
+        <p id="casualLeave">Casual Leave: 10 days</p>
+        <p id="medicalLeave">Medical Leave: 5 days</p>
+    </div>
+
+    <script>
+        function applyLeave() {
+            var leaveType = document.getElementById("leaveType").value;
+            var leaveDays = parseInt(document.getElementById("leaveDays").value);
+
+            // Assume initial leave balances
+            var casualLeaveBalance = 10;
+            var medicalLeaveBalance = 5;
+
+            // Check leave type and update balance
+            if (leaveType === "casual") {
+                if (leaveDays <= casualLeaveBalance) {
+                    casualLeaveBalance -= leaveDays;
+                    alert("Leave applied successfully!");
+                } else {
+                    alert("Insufficient leave balance.");
+                }
+            } else if (leaveType === "medical") {
+                if (leaveDays <= medicalLeaveBalance) {
+                    medicalLeaveBalance -= leaveDays;
+                    alert("Leave applied successfully!");
+                } else {
+                    alert("Insufficient leave balance.");
+                }
+            }
+
+            // Update leave balance display
+            document.getElementById("casualLeave").innerText = "Casual Leave: " + casualLeaveBalance + " days";
+            document.getElementById("medicalLeave").innerText = "Medical Leave: " + medicalLeaveBalance + " days";
+        }
+    </script>
+
+</body>
+</html>
